@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using JsonFx.Json;
-
 public class LoginApi : SingletonUnity<LoginApi>
 {
     private string uri = "login";
@@ -12,6 +10,9 @@ public class LoginApi : SingletonUnity<LoginApi>
 
     public LoginResp result = null;
 
+    /// <summary>
+    /// 根据token进行登录验证
+    /// </summary>
     public IEnumerator LoginPost(string token)
     {
         WWWForm form = new WWWForm ();
@@ -27,11 +28,11 @@ public class LoginApi : SingletonUnity<LoginApi>
         }
         else
         {
-            LoginJson loginJson = ReadFileTool.JsonToClass<LoginJson> (www.text);
+            LoginJson loginJson = JsonTool.JsonToClass<LoginJson> (www.text);
 
             Debug.Log (www.text);
 
-            if(loginJson.status == "1")
+            if(loginJson.status == Constant.Status_OK)
             {
                 result = loginJson.resp;
                 Debug.Log (result.name);

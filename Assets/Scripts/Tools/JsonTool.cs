@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JsonFx.Json;
 
-public class ReadFileTool
+public class JsonTool
 {
 
     /// <summary>  
@@ -41,6 +41,14 @@ public class ReadFileTool
     {  
         TextAsset jsonData = Resources.Load(txtAddress) as TextAsset;  
         return JsonToClasses<T>(jsonData.text);  
-    }  
+    }
+
+    /// <summary>  
+    /// 将一个对象class转换成json字符串
+    /// </summary>  
+    static public string ClassToJson<T>(T t) where T : class
+    {
+        return JsonWriter.Serialize (t);
+    }
 }
 
