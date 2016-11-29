@@ -11,7 +11,7 @@ public class CollectionApi : SingletonUnity<CollectionApi>
     public bool IsGetCollectionsSucceess = false;
     public bool IsRemoveCollectionSucceess = false;
 
-    public GetCollectionsResp result = null;
+	public Entity[] result = null;
 
     /// <summary>
     /// 获取收藏的设备
@@ -34,7 +34,7 @@ public class CollectionApi : SingletonUnity<CollectionApi>
 
             if(getCollectionsJson.status == Constant.Status_OK)
             {
-                result = getCollectionsJson.resp;
+				result = getCollectionsJson.resp;
                 IsGetCollectionsSucceess = true;
             }
             else
@@ -96,19 +96,12 @@ public class CollectionApi : SingletonUnity<CollectionApi>
 public class GetCollectionsJson
 {
     public string status = "";
-    public GetCollectionsResp resp = null;
+	public Entity[] resp;
 
     public GetCollectionsJson()
     {}
 }
 
-public class GetCollectionsResp
-{
-    public Entity[] entities;
-
-    public GetCollectionsResp()
-    {}
-}
 
 public class RemoveCollectionsJson
 {

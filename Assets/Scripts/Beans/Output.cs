@@ -14,6 +14,11 @@ public class Output
     public float k34;
     public float pn4;
 
+	public bool bRun;
+	public bool bStartBack;
+	public bool bWaterWork;
+	public bool bStop;
+
     public Output()
     {}
 

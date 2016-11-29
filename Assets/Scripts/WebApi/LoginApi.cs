@@ -35,7 +35,6 @@ public class LoginApi : SingletonUnity<LoginApi>
             if(loginJson.status == Constant.Status_OK)
             {
                 result = loginJson.resp;
-                Debug.Log (result.name);
                 IsLoginSucceess = true;
             }
             else
