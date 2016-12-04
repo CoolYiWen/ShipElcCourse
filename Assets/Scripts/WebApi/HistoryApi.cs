@@ -11,14 +11,14 @@ public class HistoryApi : SingletonUnity<HistoryApi>
     public bool IsGetHistorySucceess = false;
     public bool IsClearHistorySucceess = false;
 
-    public GetHistoryResp result = null;
+	public Entity[] result = null;
 
     /// <summary>
     /// 根据token获取历史记录
     /// </summary>
     public IEnumerator HistoryGet(string token)
     {
-        WWW www = new WWW (Constant.BaseUrl + uri + "/" + token);
+        WWW www = new WWW (Constant.BaseUrl + uri + "/get/" + token);
         yield return www;
 
         if(www.error != null)
@@ -54,7 +54,7 @@ public class HistoryApi : SingletonUnity<HistoryApi>
         WWWForm form = new WWWForm ();
         form.AddField ("token", token);
 
-        WWW www = new WWW (Constant.BaseUrl + uri, form);
+        WWW www = new WWW (Constant.BaseUrl + uri + "/clear", form);
         yield return www;
 
         if(www.error != null)
@@ -95,17 +95,9 @@ public class HistoryApi : SingletonUnity<HistoryApi>
 public class GetHistoryJson
 {
     public string status = "";
-    public GetHistoryResp resp = null;
+	public Entity[] resp = null;
 
     public GetHistoryJson()
-    {}
-}
-
-public class GetHistoryResp
-{
-    public Entity[] entities;
-
-    public GetHistoryResp()
     {}
 }
 

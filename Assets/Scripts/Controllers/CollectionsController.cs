@@ -19,22 +19,41 @@ public class CollectionsController : SingletonUnity<CollectionsController>
 	{
 		StartCoroutine(collection.CollectionsGet()) ;
 
+	}
 
+	public void RemoveEquipment(string name)
+	{
+		StartCoroutine(collection.RemoveCollectionsPost (name)) ;
 	}
 
 	void Update()
 	{
-		if(collection.IsDone)
+		if(collection.IsGetDone)
 		{
 			if(collection.IsGetCollectionsSucceess)
 			{
 				entities = collection.result;
-				collection.Restart ();
+				taskView.SetView (entities);
 			}
+
 			collection.Restart ();
 
-			taskView.SetView (entities);
 		}    
+
+		if(collection.IsRemoveDone)
+		{
+			if(collection.IsRemoveCollectionSucceess)
+			{
+				ViewManager.Instance.StartViewByPanelName (Constant.CollectionPanel);
+				ViewManager.Instance.SetMessageView ("设备删除成功！");
+			}
+			else
+			{
+				ViewManager.Instance.SetMessageView ("设备删除失败！");
+			}
+
+			collection.Restart ();
+		}
 
 
 	}

@@ -14,11 +14,14 @@ public class CheckApi : SingletonUnity<CheckApi>
     /// <summary>
     /// 传入全部参数进行验算
     /// </summary>
-    public IEnumerator CheckPost(Entity entity)
+    public IEnumerator CheckPost(string token, Entity entity)
     {
-        
+		Debug.Log("check:api");
         string jsonData = JsonTool.ClassToJson<Entity> (entity);
-        WWW www = new WWW (Constant.BaseUrl + uri, Encoding.UTF8.GetBytes(jsonData));
+		WWWForm form = new WWWForm ();
+		form.AddField ("data", jsonData);
+		form.AddField ("token", token);
+		WWW www = new WWW (Constant.BaseUrl + uri, form);
         yield return www;
 
         if(www.error != null)

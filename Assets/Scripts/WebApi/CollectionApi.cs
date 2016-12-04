@@ -7,8 +7,9 @@ public class CollectionApi : SingletonUnity<CollectionApi>
     private string uri = "collection";
 
 
-    public bool IsDone = false;
+    public bool IsGetDone = false;
     public bool IsGetCollectionsSucceess = false;
+	public bool IsRemoveDone = false;
     public bool IsRemoveCollectionSucceess = false;
 
 	public Entity[] result = null;
@@ -28,9 +29,9 @@ public class CollectionApi : SingletonUnity<CollectionApi>
         }
         else
         {
-            GetCollectionsJson getCollectionsJson = JsonTool.JsonToClass<GetCollectionsJson> (www.text);
+			Debug.Log (www.text);
 
-            Debug.Log (www.text);
+            GetCollectionsJson getCollectionsJson = JsonTool.JsonToClass<GetCollectionsJson> (www.text);
 
             if(getCollectionsJson.status == Constant.Status_OK)
             {
@@ -42,7 +43,7 @@ public class CollectionApi : SingletonUnity<CollectionApi>
                 IsGetCollectionsSucceess = false;
             }
 
-            IsDone = true;
+            IsGetDone = true;
         }
 
     }
@@ -65,9 +66,9 @@ public class CollectionApi : SingletonUnity<CollectionApi>
         }
         else
         {
-            RemoveCollectionsJson removeCollectionsJson = JsonTool.JsonToClass<RemoveCollectionsJson> (www.text);
+			Debug.Log (www.text);
 
-            Debug.Log (www.text);
+            RemoveCollectionsJson removeCollectionsJson = JsonTool.JsonToClass<RemoveCollectionsJson> (www.text);
 
             if(removeCollectionsJson.status == Constant.Status_OK)
             {
@@ -78,15 +79,16 @@ public class CollectionApi : SingletonUnity<CollectionApi>
                 IsRemoveCollectionSucceess = false;
             }
 
-            IsDone = true;
+            IsRemoveDone = true;
         }
 
     }
 
     public void Restart()
     {
-        IsDone = false;
+        IsGetDone = false;
         IsGetCollectionsSucceess = false;
+		IsRemoveDone = false;
         IsRemoveCollectionSucceess = false;
         result = null;
     }

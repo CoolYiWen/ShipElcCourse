@@ -11,9 +11,25 @@ public class CollectionsView : MonoBehaviour
 		collectionsController = CollectionsController.Instance;
 	}
 
+	void OnEnable()
+	{
+		OnRefeshClick ();
+	}
+
 	public void OnRefeshClick()
 	{
 		collectionsController.GetCollections ();
+	}
+
+	public void OnNewEQClick()
+	{
+		ViewManager.Instance.StartViewByPanelName (Constant.InputPanel);
+		ViewManager.Instance.CurrentView.GetComponent<InputView> ().ClearView ();
+	}
+
+	public void OnHistoryClick()
+	{
+		ViewManager.Instance.StartViewByPanelName (Constant.HistoryPanel);
 	}
 }
 

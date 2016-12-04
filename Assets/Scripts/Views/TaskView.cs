@@ -21,9 +21,10 @@ public class TaskView : MonoBehaviour {
 		itemHight = G_Item.GetComponent<RectTransform>().sizeDelta.y;
 	}
 
-	void OnItemClick(string sender)
+	void OnItemClick(Entity entity)
 	{
-		Debug.Log (sender);
+		ViewManager.Instance.StartViewByPanelName (Constant.OnlyReportView);
+		ViewManager.Instance.CurrentView.GetComponent<ReportView> ().SetView (entity);
 	}
 
 	public void SetView(Entity[] entities)
@@ -44,7 +45,7 @@ public class TaskView : MonoBehaviour {
 			startPoint += new Vector3 (0, -45, 0);
 
 			item.GetComponent<Button> ().onClick.AddListener (delegate {
-				this.OnItemClick(entity.name);
+				this.OnItemClick(entity);
 			});
 		}
 
