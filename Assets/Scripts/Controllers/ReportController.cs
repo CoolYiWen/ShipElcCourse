@@ -33,8 +33,15 @@ public class ReportController : SingletonUnity<ReportController>
 		{
 			if(checkApi.IsCheckSucceess)
 			{
-				checkId = checkApi.result.checkId;
-				SubmitEquipment ();
+				if(UserView.Instance.user_power)
+				{
+					checkId = checkApi.result.checkId;
+					SubmitEquipment ();
+				}
+				else
+				{
+					ViewManager.Instance.ShowMessageView ("验算成功，但您没有权限提交设备");
+				}
 			}
             else
             {

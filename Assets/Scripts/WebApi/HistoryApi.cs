@@ -8,6 +8,7 @@ public class HistoryApi : SingletonUnity<HistoryApi>
 
 
     public bool IsDone = false;
+	public bool IsClearDone = false;
     public bool IsGetHistorySucceess = false;
     public bool IsClearHistorySucceess = false;
 
@@ -79,7 +80,7 @@ public class HistoryApi : SingletonUnity<HistoryApi>
                 IsClearHistorySucceess = true;
             }
 
-            IsDone = true;
+			IsClearDone = true;
         }
 
     }
@@ -87,6 +88,7 @@ public class HistoryApi : SingletonUnity<HistoryApi>
     public void Restart()
     {
         IsDone = false;
+		IsClearDone = false;
         IsGetHistorySucceess = false;
         IsClearHistorySucceess = false;
         result = null;

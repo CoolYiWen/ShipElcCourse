@@ -198,6 +198,7 @@ public class ReportView : MonoBehaviour {
 
     public void OnDeleteOKClick()
     {
+		SelectView.SetActive (false);
         CollectionsController.Instance.RemoveEquipment (entity.name);
     }
 
@@ -213,14 +214,7 @@ public class ReportView : MonoBehaviour {
 
 	public void OnSubmitClick()
 	{
-        if(UserView.Instance.user_power)
-        {
-            reportController.CheckOnServer (entity);
-        }
-        else
-        {
-            ViewManager.Instance.ShowMessageView("错误：您没有权限执行此操作");
-        }
+        reportController.CheckOnServer (entity);
 	}
 
 	public void OnServerEditClick()

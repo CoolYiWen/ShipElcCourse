@@ -14,6 +14,11 @@ public class ViewManager : SingletonUnity<ViewManager> {
 
 	public List<string> BeforePanelNameList = new List<string> ();
 
+	void Awake()
+	{
+		Screen.SetResolution (1024, 768, false);
+	}
+
 	void Start()
 	{
 		rootView = GameObject.Find ("View");

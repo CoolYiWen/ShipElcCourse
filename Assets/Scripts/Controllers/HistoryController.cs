@@ -41,19 +41,24 @@ public class HistoryController : SingletonUnity<HistoryController>
                 ViewManager.Instance.ShowMessageView ("错误：历史记录获取失败");
             }
 
+			historyApi.Restart ();
+
+		}    
+
+		if(historyApi.IsClearDone)
+		{
 			if(historyApi.IsClearHistorySucceess)
 			{
 				GetHistory ();
 				ViewManager.Instance.ShowMessageView ("历史记录清除成功");
 			}
-            else
-            {
-                ViewManager.Instance.ShowMessageView ("错误：清除失败");
-            }
+			else
+			{
+				ViewManager.Instance.ShowMessageView ("错误：清除失败");
+			}
 
 			historyApi.Restart ();
-
-		}    
+		}
  
 	}
 

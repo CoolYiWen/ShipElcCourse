@@ -4,6 +4,7 @@ using System.Collections;
 public class LoginController : SingletonUnity<LoginController> {
 
 	private LoginApi login = null;
+	private HeartbeatApi heartbeat = null;
 	private string token = "";
 
     private float time = 0;
@@ -12,6 +13,7 @@ public class LoginController : SingletonUnity<LoginController> {
 	void Awake()
 	{
 		login = LoginApi.Instance;
+		heartbeat = HeartbeatApi.Instance;
 	}
 
     public void Login(string token)
@@ -19,6 +21,12 @@ public class LoginController : SingletonUnity<LoginController> {
 		this.token = token;
         StartCoroutine(login.LoginPost(token)) ;  
     }
+
+	public void HeartbeatBag(string token)
+	{
+		this.token = token;
+		StartCoroutine(heartbeat.LoginPost(token)) ;  
+	}
 
     public void OffLineLogin()
     {
@@ -32,11 +40,6 @@ public class LoginController : SingletonUnity<LoginController> {
 		{
             if(login.IsOffInternet)
             {
-                if(!isBegin)
-                {
-                    UserView.Instance.CancelUser ();
-                }
-
                 token = "";
                 ViewManager.Instance.ShowMessageView("错误：无法连接网络");
 
@@ -57,8 +60,8 @@ public class LoginController : SingletonUnity<LoginController> {
 					loginView.GetComponent<LoginView> ().Token.text = "";
 				}
 
-				ViewManager.Instance.StartViewByPanelName(Constant.CollectionPanel);
 				ViewManager.Instance.StartUserView ();
+				ViewManager.Instance.StartViewByPanelName(Constant.CollectionPanel);
 			}
 			else
 			{
@@ -74,6 +77,25 @@ public class LoginController : SingletonUnity<LoginController> {
 			login.Restart ();
 		} 
 
+		if(heartbeat.IsDone)
+		{
+			if(heartbeat.IsOffInternet || ! heartbeat.IsLoginSucceess)
+			{
+				if(!isBegin)
+				{
+					UserView.Instance.CancelUser ();
+				}
+
+				token = "";
+				ViewManager.Instance.ShowMessageView("错误：无法连接网络");
+
+				login.Restart ();
+				return;
+			}
+
+			heartbeat.Restart ();
+		} 
+
         //登录心跳包
         time += Time.fixedDeltaTime;
         if(time > 5)
@@ -82,7 +104,7 @@ public class LoginController : SingletonUnity<LoginController> {
 
             if (token != "")
             {
-                Login (token);
+				HeartbeatBag (token);
             }
         }
 
