@@ -61,7 +61,7 @@ public class ViewManager : SingletonUnity<ViewManager> {
 	}
 
 
-	public void SetMessageView(string msg)
+	public void ShowMessageView(string msg)
 	{
 		GameObject view = Instantiate (Pf_MessageView) as GameObject;
 		view.transform.transform.SetParent (rootView.transform);

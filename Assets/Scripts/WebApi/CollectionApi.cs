@@ -29,18 +29,19 @@ public class CollectionApi : SingletonUnity<CollectionApi>
         }
         else
         {
-			Debug.Log (www.text);
-
             GetCollectionsJson getCollectionsJson = JsonTool.JsonToClass<GetCollectionsJson> (www.text);
+
+            if(getCollectionsJson == null)
+            {
+                yield break;
+            }
+
+            Debug.Log (www.text);
 
             if(getCollectionsJson.status == Constant.Status_OK)
             {
 				result = getCollectionsJson.resp;
                 IsGetCollectionsSucceess = true;
-            }
-            else
-            {
-                IsGetCollectionsSucceess = false;
             }
 
             IsGetDone = true;
@@ -66,17 +67,18 @@ public class CollectionApi : SingletonUnity<CollectionApi>
         }
         else
         {
-			Debug.Log (www.text);
-
             RemoveCollectionsJson removeCollectionsJson = JsonTool.JsonToClass<RemoveCollectionsJson> (www.text);
+
+            if(removeCollectionsJson == null)
+            {
+                yield break;
+            }
+
+            Debug.Log (www.text);
 
             if(removeCollectionsJson.status == Constant.Status_OK)
             {
                 IsRemoveCollectionSucceess = true;
-            }
-            else
-            {
-                IsRemoveCollectionSucceess = false;
             }
 
             IsRemoveDone = true;

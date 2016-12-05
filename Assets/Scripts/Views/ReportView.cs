@@ -6,7 +6,7 @@ public class ReportView : MonoBehaviour {
 
 	private ReportController reportController = null;
 
-	public GameObject CoverView;
+	public GameObject SelectView;
 
 	public GameObject Content_Run;
 	public GameObject Content_Start;
@@ -51,6 +51,16 @@ public class ReportView : MonoBehaviour {
 		reportController = ReportController.Instance;
 	}
 
+    void OnEnable()
+    {
+        UserView.Instance.SetProfilePosition (true);
+        UserView.Instance.Button_Back.SetActive (true);
+        UserView.Instance.Button_Back.GetComponent<Button> ().onClick.RemoveAllListeners ();
+        UserView.Instance.Button_Back.GetComponent<Button> ().onClick.AddListener (delegate {
+            OnBackClick();
+        });
+    }
+
 	public void SetView(Entity entity)
 	{
 		this.entity = entity;
@@ -69,6 +79,39 @@ public class ReportView : MonoBehaviour {
 		T_k03.text = entity.k03.ToString();
 		T_k24.text = entity.k24.ToString();
 		T_k04.text = entity.k04.ToString();
+
+        if(entity.bRun)
+        {
+            Content_Run.SetActive (true);
+        }
+        else
+        {
+            Content_Run.SetActive (false);
+        }
+        if(entity.bStartBack)
+        {
+            Content_Start.SetActive (true);
+        }
+        else
+        {
+            Content_Start.SetActive (false);
+        }
+        if(entity.bWaterWork)
+        {
+            Content_Water.SetActive (true);
+        }
+        else
+        {
+            Content_Water.SetActive (false);
+        }
+        if(entity.bStop)
+        {
+            Content_Stop.SetActive (true);
+        }
+        else
+        {
+            Content_Stop.SetActive (false);
+        }
 
 		switch(entity.type1)
 		{
@@ -144,18 +187,23 @@ public class ReportView : MonoBehaviour {
 
 	public void OnCoverOKClick()
 	{
-		CoverView.SetActive (false);
+		SelectView.SetActive (false);
 		reportController.CoverToSubmit ();
 	}
 
-	public void OnCoverNoClick()
+	public void OnSelectNoClick()
 	{
-		CoverView.SetActive (false);
+		SelectView.SetActive (false);
 	}
 
-	public void ShowCoverView()
+    public void OnDeleteOKClick()
+    {
+        CollectionsController.Instance.RemoveEquipment (entity.name);
+    }
+
+	public void ShowSelectView()
 	{
-		CoverView.SetActive (true);
+		SelectView.SetActive (true);
 	}
 
 	public void OnBackClick()
@@ -165,17 +213,31 @@ public class ReportView : MonoBehaviour {
 
 	public void OnSubmitClick()
 	{
-		reportController.CheckOnServer (entity);
+        if(UserView.Instance.user_power)
+        {
+            reportController.CheckOnServer (entity);
+        }
+        else
+        {
+            ViewManager.Instance.ShowMessageView("错误：您没有权限执行此操作");
+        }
 	}
 
-	public void OnOnlyBackClick()
+	public void OnServerEditClick()
 	{
 		ViewManager.Instance.StartViewByPanelName (Constant.InputPanel);
 		ViewManager.Instance.CurrentView.GetComponent<InputView> ().SetView (entity);
 	}
 
-	public void OnOnlyDeleteClick()
+	public void OnServerDeleteClick()
 	{
-		CollectionsController.Instance.RemoveEquipment (entity.name);
+        if(UserView.Instance.user_power)
+        {
+            ShowSelectView ();
+        }
+        else
+        {
+            ViewManager.Instance.ShowMessageView("错误：您没有权限执行此操作");
+        }
 	}
 }

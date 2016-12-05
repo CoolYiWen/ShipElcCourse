@@ -36,6 +36,10 @@ public class ReportController : SingletonUnity<ReportController>
 				checkId = checkApi.result.checkId;
 				SubmitEquipment ();
 			}
+            else
+            {
+                ViewManager.Instance.ShowMessageView ("错误：服务器同步验算失败");
+            }
 
 			checkApi.Restart ();
 		}
@@ -44,17 +48,17 @@ public class ReportController : SingletonUnity<ReportController>
 		{
 			if(collectApi.IsCollectSucceess)
 			{
-				ViewManager.Instance.SetMessageView ("设备提交成功！");
+				ViewManager.Instance.ShowMessageView ("设备提交成功！");
 			}
 			else
 			{
 				if (collectApi.result.exist == Constant.Exist)
 				{
-					reportView.ShowCoverView ();
+					reportView.ShowSelectView ();
 				}
 				else
 				{
-					ViewManager.Instance.SetMessageView ("提交失败！");
+					ViewManager.Instance.ShowMessageView ("错误：提交失败！");
 				}
 			}
 			collectApi.Restart ();

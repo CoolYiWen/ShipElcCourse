@@ -7,6 +7,7 @@ public class HistoryController : SingletonUnity<HistoryController>
 {
 	private HistoryApi historyApi = null;
 	public TaskView taskView = null;
+    public HistoryView historyView = null;
 
 	private Entity[] entities = null;
 
@@ -32,14 +33,23 @@ public class HistoryController : SingletonUnity<HistoryController>
 			if(historyApi.IsGetHistorySucceess)
 			{
 				entities = historyApi.result;
+                historyView.SetCollectionBgView (entities.Length);
 				taskView.SetView (entities);
 			}
+            else
+            {
+                ViewManager.Instance.ShowMessageView ("错误：历史记录获取失败");
+            }
 
 			if(historyApi.IsClearHistorySucceess)
 			{
 				GetHistory ();
-				ViewManager.Instance.SetMessageView ("历史记录清除成功");
+				ViewManager.Instance.ShowMessageView ("历史记录清除成功");
 			}
+            else
+            {
+                ViewManager.Instance.ShowMessageView ("错误：清除失败");
+            }
 
 			historyApi.Restart ();
 

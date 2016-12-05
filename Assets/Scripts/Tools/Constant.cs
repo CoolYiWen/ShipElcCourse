@@ -16,7 +16,8 @@ public class Constant
 	public static string UserPanel = "UserPanel";
 	public static string InputPanel = "InputPanel";
 	public static string ReportView = "ReportPanel";
-	public static string OnlyReportView = "OnlyReportPanel";
+	public static string ServerReportView = "ServerReportPanel";
+    public static string OffLineReportView = "OffLineReportPanel";
 	public static string HistoryPanel = "HistoryPanel";
 
 	public static string BB_Name = "name";

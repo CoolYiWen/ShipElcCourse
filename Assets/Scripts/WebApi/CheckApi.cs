@@ -33,6 +33,11 @@ public class CheckApi : SingletonUnity<CheckApi>
         {
             CheckJson checkJson = JsonTool.JsonToClass<CheckJson> (www.text);
 
+            if(checkJson == null)
+            {
+                yield break;
+            }
+
             Debug.Log (www.text);
 
             if(checkJson.status == Constant.Status_OK)
@@ -40,10 +45,6 @@ public class CheckApi : SingletonUnity<CheckApi>
                 result = checkJson.resp;
                 Debug.Log (result.checkId);
                 IsCheckSucceess = true;
-            }
-            else
-            {
-                IsCheckSucceess = false;
             }
 
             IsDone = true;

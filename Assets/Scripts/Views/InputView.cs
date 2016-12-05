@@ -53,14 +53,33 @@ public class InputView : MonoBehaviour {
 	private float k04;
 	private int type4;
 
-	private string errorMsg = "参数填写不完整";
+	private string errorMsg = "错误：参数填写不完整";
+
+    void OnEnable()
+    {
+        if(BlackBoard.Instance.GetValue<string>(Constant.BB_Token, "") == "")
+        {
+            UserView.Instance.Button_Back.SetActive (false);
+            UserView.Instance.SetProfilePosition (false);
+        }
+        else
+        {
+            UserView.Instance.SetProfilePosition (true);
+            UserView.Instance.Button_Back.SetActive (true);
+            UserView.Instance.Button_Back.GetComponent<Button> ().onClick.RemoveAllListeners ();
+            UserView.Instance.Button_Back.GetComponent<Button> ().onClick.AddListener (delegate {
+                OnBackClick();
+            });
+        }
+
+    }
 
 	public void OnCalculateClick()
 	{
 		//主属性
 		if(IF_No.text == "" || IF_Name.text == "" || IF_num.text == "" || IF_pmax.text == "" || IF_p1.text == "" || IF_e.text == "")
 		{
-			ViewManager.Instance.SetMessageView (errorMsg);
+			ViewManager.Instance.ShowMessageView (errorMsg);
 			return;
 		}
 		else
@@ -77,7 +96,7 @@ public class InputView : MonoBehaviour {
 		{
 			if(IF_k21.text == "" || IF_k01.text == "")
 			{
-				ViewManager.Instance.SetMessageView (errorMsg);
+				ViewManager.Instance.ShowMessageView (errorMsg);
 				return;
 			}
 			else
@@ -98,7 +117,7 @@ public class InputView : MonoBehaviour {
 		{
 			if(IF_k22.text == "" || IF_k02.text == "")
 			{
-				ViewManager.Instance.SetMessageView (errorMsg);
+				ViewManager.Instance.ShowMessageView (errorMsg);
 				return;
 			}
 			else
@@ -119,7 +138,7 @@ public class InputView : MonoBehaviour {
 		{
 			if(IF_k23.text == "" || IF_k03.text == "")
 			{
-				ViewManager.Instance.SetMessageView (errorMsg);
+				ViewManager.Instance.ShowMessageView (errorMsg);
 				return;
 			}
 			else
@@ -140,7 +159,7 @@ public class InputView : MonoBehaviour {
 		{
 			if(IF_k24.text == "" || IF_k04.text == "")
 			{
-				ViewManager.Instance.SetMessageView (errorMsg);
+				ViewManager.Instance.ShowMessageView (errorMsg);
 				return;
 			}
 			else

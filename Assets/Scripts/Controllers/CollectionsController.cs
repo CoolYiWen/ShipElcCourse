@@ -7,6 +7,7 @@ public class CollectionsController : SingletonUnity<CollectionsController>
 {
 	private CollectionApi collection = null;
 	public TaskView taskView = null;
+    public CollectionsView collectionsView = null;
 
 	private Entity[] entities = null;
 
@@ -33,8 +34,13 @@ public class CollectionsController : SingletonUnity<CollectionsController>
 			if(collection.IsGetCollectionsSucceess)
 			{
 				entities = collection.result;
+                collectionsView.SetCollectionBgView (entities.Length);
 				taskView.SetView (entities);
 			}
+            else
+            {
+                ViewManager.Instance.ShowMessageView ("错误：设备获取失败");
+            }
 
 			collection.Restart ();
 
@@ -45,11 +51,11 @@ public class CollectionsController : SingletonUnity<CollectionsController>
 			if(collection.IsRemoveCollectionSucceess)
 			{
 				ViewManager.Instance.StartViewByPanelName (Constant.CollectionPanel);
-				ViewManager.Instance.SetMessageView ("设备删除成功！");
+				ViewManager.Instance.ShowMessageView ("设备删除成功！");
 			}
 			else
 			{
-				ViewManager.Instance.SetMessageView ("设备删除失败！");
+				ViewManager.Instance.ShowMessageView ("设备删除失败！");
 			}
 
 			collection.Restart ();

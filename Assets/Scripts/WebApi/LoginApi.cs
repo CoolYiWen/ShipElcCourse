@@ -7,6 +7,7 @@ public class LoginApi : SingletonUnity<LoginApi>
 
     public bool IsDone = false;
     public bool IsLoginSucceess = false;
+    public bool IsOffInternet = false;
 
     public LoginResp result = null;
 
@@ -30,16 +31,20 @@ public class LoginApi : SingletonUnity<LoginApi>
         {
             LoginJson loginJson = JsonTool.JsonToClass<LoginJson> (www.text);
 
-            Debug.Log (www.text);
-
-            if(loginJson.status == Constant.Status_OK)
+            if(loginJson == null)
             {
-                result = loginJson.resp;
-                IsLoginSucceess = true;
+                IsOffInternet = true;
             }
             else
             {
-                IsLoginSucceess = false;
+                Debug.Log (www.text);
+
+                if(loginJson.status == Constant.Status_OK)
+                {
+                    result = loginJson.resp;
+                    IsLoginSucceess = true;
+                }
+
             }
 
             IsDone = true;
@@ -51,6 +56,7 @@ public class LoginApi : SingletonUnity<LoginApi>
     {
         IsDone = false;
         IsLoginSucceess = false;
+        IsOffInternet = false;
         result = null;
     }
 

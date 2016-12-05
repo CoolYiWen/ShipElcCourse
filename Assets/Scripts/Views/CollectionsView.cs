@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CollectionsView : MonoBehaviour
 {
+    public GameObject CollectionBg;
+
+    private float minBgHight;
+    private float maxBgHight = 534f;
+    private float bgWidth;
 
 	private CollectionsController collectionsController = null;
+
+    void Start()
+    {
+        minBgHight = CollectionBg.GetComponent<RectTransform>().sizeDelta.y;
+        bgWidth = CollectionBg.GetComponent<RectTransform>().sizeDelta.x;
+    }
 
 	void Awake()
 	{
@@ -14,7 +26,16 @@ public class CollectionsView : MonoBehaviour
 	void OnEnable()
 	{
 		OnRefeshClick ();
+
+        UserView.Instance.Button_Back.SetActive (false);
+        UserView.Instance.Button_Back.GetComponent<Button> ().onClick.RemoveAllListeners ();
+        UserView.Instance.SetProfilePosition (false);
 	}
+
+    public void SetCollectionBgView(int size)
+    {
+        CollectionBg.GetComponent<RectTransform> ().sizeDelta = new Vector2 (bgWidth, Mathf.Clamp (minBgHight + 76 * (size - 2), minBgHight, maxBgHight));
+    }
 
 	public void OnRefeshClick()
 	{

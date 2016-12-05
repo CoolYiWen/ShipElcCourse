@@ -13,20 +13,20 @@ public class LoginView : MonoBehaviour
         loginController = LoginController.Instance;
     }
 
-	void OnEnable()
-	{
-		Token.placeholder.color = new Color (0, 0, 0, 125);
-	}
-
     public void OnLoginClick()
 	{
 		loginController.Login (Token.text);
 	}
 
+    public void OnOffLineLoginClick()
+    {
+        loginController.OffLineLogin ();
+    }
+
 	public void WarnTokenError()
 	{
 		Token.text = "";
-		Token.placeholder.color = new Color (255, 0, 0);
+        ViewManager.Instance.ShowMessageView ("口令输入错误");
 	}
 
 }

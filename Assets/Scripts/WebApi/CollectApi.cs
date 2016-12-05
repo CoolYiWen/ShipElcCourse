@@ -33,18 +33,19 @@ public class CollectApi : SingletonUnity<CollectApi>
         {
             CollectJson collectJson = JsonTool.JsonToClass<CollectJson> (www.text);
 
+            if(collectJson == null)
+            {
+                yield break;
+            }
+
             Debug.Log (www.text);
 
             if(collectJson.status == Constant.Status_OK)
             {
-                result = collectJson.resp;
                 IsCollectSucceess = true;
             }
-            else
-            {
-                IsCollectSucceess = false;
-                result = collectJson.resp;
-            }
+
+            result = collectJson.resp;
 
             IsDone = true;
         }

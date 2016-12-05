@@ -30,16 +30,17 @@ public class HistoryApi : SingletonUnity<HistoryApi>
         {
             GetHistoryJson getHistoryJson = JsonTool.JsonToClass<GetHistoryJson> (www.text);
 
+            if(getHistoryJson == null)
+            {
+                yield break;
+            }
+
             Debug.Log (www.text);
 
             if(getHistoryJson.status == Constant.Status_OK)
             {
                 result = getHistoryJson.resp;
                 IsGetHistorySucceess = true;
-            }
-            else
-            {
-                IsGetHistorySucceess = false;
             }
 
             IsDone = true;
@@ -66,15 +67,16 @@ public class HistoryApi : SingletonUnity<HistoryApi>
         {
             ClearHistoryJson clearHistoryJson = JsonTool.JsonToClass<ClearHistoryJson> (www.text);
 
+            if(clearHistoryJson == null)
+            {
+                yield break;
+            }
+
             Debug.Log (www.text);
 
             if(clearHistoryJson.status == Constant.Status_OK)
             {
                 IsClearHistorySucceess = true;
-            }
-            else
-            {
-                IsClearHistorySucceess = false;
             }
 
             IsDone = true;

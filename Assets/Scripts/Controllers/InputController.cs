@@ -3,7 +3,6 @@ using System.Collections;
 
 public class InputController : MonoBehaviour {
 
-	private Input input = null;
 	private Output output = null;
 
 	void Start () {
@@ -16,7 +15,7 @@ public class InputController : MonoBehaviour {
 
 	public void Calculate(Input input)
 	{
-		this.input = input;
+		
 		output = Algorithm.NeedCoefficientMethod (input);
 
 		Entity entity = new Entity ();
@@ -56,7 +55,14 @@ public class InputController : MonoBehaviour {
 		entity.bWaterWork = output.bWaterWork;
 		entity.bStop = output.bStop;
 
-		ViewManager.Instance.StartViewByPanelName (Constant.ReportView);
-		ViewManager.Instance.CurrentView.GetComponent<ReportView> ().SetView (entity);
+        if(BlackBoard.Instance.GetValue<string>(Constant.BB_Token, "") == "")
+        {
+            ViewManager.Instance.StartViewByPanelName (Constant.OffLineReportView);
+        }
+        else
+        {
+            ViewManager.Instance.StartViewByPanelName (Constant.ReportView);
+        }
+        ViewManager.Instance.CurrentView.GetComponent<ReportView> ().SetView (entity);
 	}
 }
