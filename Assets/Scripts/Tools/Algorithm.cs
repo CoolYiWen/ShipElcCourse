@@ -2,6 +2,7 @@
 
 public class Algorithm 
 {
+	//设备计算算法
 	static public Output NeedCoefficientMethod(Input input)
 	{
 		Output output = new Output();
@@ -55,6 +56,36 @@ public class Algorithm
 			}
 
 			return output;
+		}
+	}
+
+	//快速排序算法
+	static public void QuickSortEntities(Entity[] entities, int left, int right)
+	{
+		if(left < right)
+		{
+			int id = entities[left].id;
+			int low = left;
+			int high = right;
+
+			while(low < high)
+			{
+				while(low < high && entities[high].id > id)
+				{
+					high--;
+				}
+				entities[low] = entities[high];
+
+				while(low < high && entities[low].id < id)
+				{
+					low++;
+				}
+				entities[high] = entities[low];
+			}
+
+			entities[low] = entities[left];
+			QuickSortEntities(entities,left,low-1);
+			QuickSortEntities(entities,low+1,right);
 		}
 	}
 

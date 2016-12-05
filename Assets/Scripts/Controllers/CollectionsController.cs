@@ -34,6 +34,8 @@ public class CollectionsController : SingletonUnity<CollectionsController>
 			if(collection.IsGetCollectionsSucceess)
 			{
 				entities = collection.result;
+				Algorithm.QuickSortEntities (entities, 0, entities.Length - 1);
+
                 collectionsView.SetCollectionBgView (entities.Length);
 				taskView.SetView (entities);
 			}

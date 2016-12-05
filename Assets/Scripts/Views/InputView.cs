@@ -54,6 +54,7 @@ public class InputView : MonoBehaviour {
 	private int type4;
 
 	private string errorMsg = "错误：参数填写不完整";
+	private string errorMsg2 = "参数填写错误";
 
     void OnEnable()
     {
@@ -90,6 +91,12 @@ public class InputView : MonoBehaviour {
 			pmax = float.Parse(IF_pmax.text);
 			p1 = float.Parse(IF_p1.text);
 			e = float.Parse(IF_e.text)/100;
+
+			if (No <= 0 || num <= 0 || pmax <= 0 || p1 <= 0 || e <= 0)
+			{
+				ViewManager.Instance.ShowMessageView (errorMsg2);
+				return;
+			}
 		}
 		//航行状态
 		if(Toggle_Run.isOn)
@@ -104,6 +111,12 @@ public class InputView : MonoBehaviour {
 				k21 = float.Parse(IF_k21.text);
 				k01 = float.Parse(IF_k01.text);
 				type1 = Dd_type1.value + 1;
+
+				if (k21 <= 0 || k01 <= 0)
+				{
+					ViewManager.Instance.ShowMessageView (errorMsg2);
+					return;
+				}
 			}
 		}
 		else
@@ -125,6 +138,12 @@ public class InputView : MonoBehaviour {
 				k22 = float.Parse(IF_k22.text);
 				k02 = float.Parse(IF_k02.text);
 				type2 = Dd_type2.value + 1;
+
+				if (k22 <= 0 || k02 <= 0)
+				{
+					ViewManager.Instance.ShowMessageView (errorMsg2);
+					return;
+				}
 			}
 		}
 		else
@@ -146,6 +165,12 @@ public class InputView : MonoBehaviour {
 				k23 = float.Parse(IF_k23.text);
 				k03 = float.Parse(IF_k03.text);
 				type3 = Dd_type3.value + 1;
+
+				if (k23 <= 0 || k03 <= 0)
+				{
+					ViewManager.Instance.ShowMessageView (errorMsg2);
+					return;
+				}
 			}
 		}
 		else
@@ -167,6 +192,12 @@ public class InputView : MonoBehaviour {
 				k24 = float.Parse(IF_k24.text);
 				k04 = float.Parse(IF_k04.text);
 				type4 = Dd_type4.value + 1;
+
+				if (k24 <= 0 || k04 <= 0)
+				{
+					ViewManager.Instance.ShowMessageView (errorMsg2);
+					return;
+				}
 			}
 		}
 		else
@@ -181,7 +212,7 @@ public class InputView : MonoBehaviour {
 			k22, k02, type2, 
 			k23, k03, type3, 
 			k24, k04, type4);
-
+		
 		inputController.Calculate (input);
 	}
 
