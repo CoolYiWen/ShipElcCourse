@@ -57,11 +57,11 @@ public class InputController : MonoBehaviour {
 
         if(BlackBoard.Instance.GetValue<string>(Constant.BB_Token, "") == "")
         {
-            ViewManager.Instance.StartViewByPanelName (Constant.OffLineReportView);
+            ViewManager.Instance.StartViewByPanelName (Constant.OffLineReportPanel);
         }
         else
         {
-            ViewManager.Instance.StartViewByPanelName (Constant.ReportView);
+            ViewManager.Instance.StartViewByPanelName (Constant.ReportPanel);
         }
         ViewManager.Instance.CurrentView.GetComponent<ReportView> ().SetView (entity);
 	}

@@ -59,6 +59,17 @@ public class Algorithm
 		}
 	}
 
+    static public MotorOutput CalculateMotor(Entity[] entities)
+    {
+        MotorOutput output = new MotorOutput();
+
+
+
+
+
+        return output;
+    }
+
 	//快速排序算法
 	static public void QuickSortEntities(Entity[] entities, int left, int right)
 	{

@@ -15,10 +15,11 @@ public class Constant
 	public static string CollectionPanel = "CollectionPanel";
 	public static string UserPanel = "UserPanel";
 	public static string InputPanel = "InputPanel";
-	public static string ReportView = "ReportPanel";
-	public static string ServerReportView = "ServerReportPanel";
-    public static string OffLineReportView = "OffLineReportPanel";
+	public static string ReportPanel = "ReportPanel";
+	public static string ServerReportPanel = "ServerReportPanel";
+    public static string OffLineReportPanel = "OffLineReportPanel";
 	public static string HistoryPanel = "HistoryPanel";
+    public static string MotorOutputPanel = "MotorOutputPanel";
 
 	public static string BB_Name = "name";
 	public static string BB_Token = "token";

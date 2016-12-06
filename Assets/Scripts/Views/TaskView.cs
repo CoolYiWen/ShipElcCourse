@@ -27,7 +27,7 @@ public class TaskView : MonoBehaviour {
 
 	void OnItemClick(Entity entity)
 	{
-		ViewManager.Instance.StartViewByPanelName (Constant.ServerReportView);
+		ViewManager.Instance.StartViewByPanelName (Constant.ServerReportPanel);
 		ViewManager.Instance.CurrentView.GetComponent<ReportView> ().SetView (entity);
 	}
 

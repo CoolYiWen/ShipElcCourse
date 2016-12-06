@@ -52,5 +52,10 @@ public class CollectionsView : MonoBehaviour
 	{
 		ViewManager.Instance.StartViewByPanelName (Constant.HistoryPanel);
 	}
+
+    public void OnMotorOutputClick()
+    {
+        MotorOutputController.Instance.StartMotorOutputView (CollectionsController.Instance.GetEntities());
+    }
 }
 

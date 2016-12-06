@@ -66,5 +66,10 @@ public class CollectionsController : SingletonUnity<CollectionsController>
 
 	}
 
+    public Entity[] GetEntities()
+    {
+        return entities;
+    }
+
 }
 
