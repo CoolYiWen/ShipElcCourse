@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ViewManager : SingletonUnity<ViewManager> {
+
+	public CanvasScaler mainScaler;
+	private float deltaScreenHeight = 0f;
 
 	public GameObject UserView;
 	public GameObject Pf_MessageView;
@@ -24,6 +28,20 @@ public class ViewManager : SingletonUnity<ViewManager> {
 		rootView = GameObject.Find ("View");
 
 		StartViewByPanelName (Constant.LoginPanel);
+	}
+
+	void Update()
+	{
+		deltaScreenHeight = (float)Screen.height - 768.0f;
+
+		if(deltaScreenHeight > 0)
+		{
+			mainScaler.scaleFactor = 1 + 0.001602f * deltaScreenHeight;
+		}
+		else
+		{
+			mainScaler.scaleFactor = 1 + 0.001094f * deltaScreenHeight;
+		}
 	}
 
 	public void StartViewByPanelName(string panelName)

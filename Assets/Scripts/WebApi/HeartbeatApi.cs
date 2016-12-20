@@ -25,6 +25,7 @@ public class HeartbeatApi : SingletonUnity<HeartbeatApi>
 		if(www.error != null)
 		{
 			Debug.Log (www.error);
+			IsOffInternet = true;
 			yield return null;
 		}
 		else
@@ -46,10 +47,8 @@ public class HeartbeatApi : SingletonUnity<HeartbeatApi>
 				}
 
 			}
-
-			IsDone = true;
 		}
-
+		IsDone = true;
 	}
 
 	public void Restart()

@@ -25,6 +25,7 @@ public class LoginApi : SingletonUnity<LoginApi>
         if(www.error != null)
         {
             Debug.Log (www.error);
+			IsOffInternet = true;
             yield return null;
         }
         else
@@ -46,9 +47,9 @@ public class LoginApi : SingletonUnity<LoginApi>
                 }
 
             }
-
-            IsDone = true;
         }
+
+		IsDone = true;
 
     }
 

@@ -19,7 +19,7 @@ public class Constant
 	public static string ServerReportPanel = "ServerReportPanel";
     public static string OffLineReportPanel = "OffLineReportPanel";
 	public static string HistoryPanel = "HistoryPanel";
-    public static string MotorOutputPanel = "MotorOutputPanel";
+    public static string MotorOutputPanel = "MotorReportPanel";
 
 	public static string BB_Name = "name";
 	public static string BB_Token = "token";

@@ -89,7 +89,7 @@ public class LoginController : SingletonUnity<LoginController> {
 				token = "";
 				ViewManager.Instance.ShowMessageView("错误：无法连接网络");
 
-				login.Restart ();
+				heartbeat.Restart ();
 				return;
 			}
 

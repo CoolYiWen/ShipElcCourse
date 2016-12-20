@@ -68,17 +68,17 @@ public class ReportView : MonoBehaviour {
 		T_No.text = entity.id.ToString();
 		T_Name.text = entity.name;
 		T_num.text = entity.num.ToString();
-		T_pmax.text = entity.pmax.ToString();
-		T_p1.text = entity.p1.ToString();
-		T_e.text = (entity.e * 100).ToString();
-		T_k21.text = entity.k21.ToString();
-		T_k01.text = entity.k01.ToString();
-		T_k22.text = entity.k22.ToString();
-		T_k02.text = entity.k02.ToString();
-		T_k23.text = entity.k23.ToString();
-		T_k03.text = entity.k03.ToString();
-		T_k24.text = entity.k24.ToString();
-		T_k04.text = entity.k04.ToString();
+		T_pmax.text = entity.pmax.ToString("0.000");
+		T_p1.text = entity.p1.ToString("0.000");
+		T_e.text = (entity.e * 100).ToString("0.000");
+		T_k21.text = entity.k21.ToString("0.000");
+		T_k01.text = entity.k01.ToString("0.000");
+		T_k22.text = entity.k22.ToString("0.000");
+		T_k02.text = entity.k02.ToString("0.000");
+		T_k23.text = entity.k23.ToString("0.000");
+		T_k03.text = entity.k03.ToString("0.000");
+		T_k24.text = entity.k24.ToString("0.000");
+		T_k04.text = entity.k04.ToString("0.000");
 
         if(entity.bRun)
         {
@@ -170,17 +170,17 @@ public class ReportView : MonoBehaviour {
 			break;
 		}
 
-		T_p4.text = entity.p4.ToString();
-		T_p5.text = entity.p5.ToString();
-		T_k1.text = entity.k1.ToString();
-		T_k31.text = entity.k31.ToString();
-		T_pn1.text = entity.pn1.ToString();
-		T_k32.text = entity.k32.ToString();
-		T_pn2.text = entity.pn2.ToString();
-		T_k33.text = entity.k33.ToString();
-		T_pn3.text = entity.pn3.ToString();
-		T_k34.text = entity.k34.ToString();
-		T_pn4.text = entity.pn4.ToString();
+		T_p4.text = entity.p4.ToString("0.000");
+		T_p5.text = entity.p5.ToString("0.000");
+		T_k1.text = entity.k1.ToString("0.000");
+		T_k31.text = entity.k31.ToString("0.000");
+		T_pn1.text = entity.pn1.ToString("0.000");
+		T_k32.text = entity.k32.ToString("0.000");
+		T_pn2.text = entity.pn2.ToString("0.000");
+		T_k33.text = entity.k33.ToString("0.000");
+		T_pn3.text = entity.pn3.ToString("0.000");
+		T_k34.text = entity.k34.ToString("0.000");
+		T_pn4.text = entity.pn4.ToString("0.000");
 
 
 	}

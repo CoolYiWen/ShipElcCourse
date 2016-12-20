@@ -39,19 +39,19 @@ public class MotorOutputView : MonoBehaviour
     public void SetView(MotorOutput motorOutput)
     {
         T_Num.text = num.ToString();
-        T_P.text = motorOutput.pd.ToString ();
-        T_H1.text = motorOutput.H1.ToString ();
-        T_H2.text = motorOutput.H2.ToString ();
-        T_EH.text = motorOutput.EH.ToString ();
-        T_J1.text = motorOutput.J1.ToString ();
-        T_J2.text = motorOutput.J2.ToString ();
-        T_EJ.text = motorOutput.EJ.ToString ();
-        T_S1.text = motorOutput.S1.ToString ();
-        T_S2.text = motorOutput.S2.ToString ();
-        T_ES.text = motorOutput.ES.ToString ();
-        T_T1.text = motorOutput.T1.ToString ();
-        T_T2.text = motorOutput.T2.ToString ();
-        T_ET.text = motorOutput.ET.ToString ();
+		T_P.text = motorOutput.pd.ToString ("0.000");
+		T_H1.text = motorOutput.H1.ToString ();
+		T_H2.text = motorOutput.H2.ToString ();
+		T_EH.text = motorOutput.EH.ToString ("0.000");
+		T_J1.text = motorOutput.J1.ToString ();
+		T_J2.text = motorOutput.J2.ToString ();
+		T_EJ.text = motorOutput.EJ.ToString ("0.000");
+		T_S1.text = motorOutput.S1.ToString ();
+		T_S2.text = motorOutput.S2.ToString ();
+		T_ES.text = motorOutput.ES.ToString ("0.000");
+		T_T1.text = motorOutput.T1.ToString ();
+		T_T2.text = motorOutput.T2.ToString ();
+		T_ET.text = motorOutput.ET.ToString ("0.000");
     }
 
 }
