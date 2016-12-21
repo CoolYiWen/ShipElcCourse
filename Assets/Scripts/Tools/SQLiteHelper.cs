@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Mono.Data;
 using Mono.Data.Sqlite;
 using System;
 using System.Data;
@@ -34,8 +35,8 @@ public class SQLiteHelper
 	/// <returns>The query.</returns>
 	/// <param name="queryString">SQL命令字符串</param>
 	public SqliteDataReader ExecuteQuery(string queryString)
-	{
-		m_DbCommand = m_DbConnection.CreateCommand();
+	{  
+		m_DbCommand = (SqliteCommand) m_DbConnection.CreateCommand();
 		m_DbCommand.CommandText = queryString;
 		m_DataReader = m_DbCommand.ExecuteReader();
 		return m_DataReader;
