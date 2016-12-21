@@ -225,13 +225,21 @@ public class ReportView : MonoBehaviour {
 
 	public void OnServerDeleteClick()
 	{
-        if(UserView.Instance.user_power)
+        if(BlackBoard.Instance.GetValue<string> (Constant.BB_Name, "") == "")
         {
             ShowSelectView ();
         }
         else
         {
-            ViewManager.Instance.ShowMessageView("错误：您没有权限执行此操作");
+            if(UserView.Instance.user_power)
+            {
+                ShowSelectView ();
+            }
+            else
+            {
+                ViewManager.Instance.ShowMessageView("错误：您没有权限执行此操作");
+            }
         }
+
 	}
 }

@@ -30,8 +30,9 @@ public class LoginController : SingletonUnity<LoginController> {
 
     public void OffLineLogin()
     {
+        BlackBoard.Instance.SetValue (Constant.BB_Name, "");
         ViewManager.Instance.StartUserView ();
-        ViewManager.Instance.StartViewByPanelName (Constant.InputPanel);
+        ViewManager.Instance.StartViewByPanelName (Constant.CollectionPanel);
     }
 
 	void Update()
@@ -96,17 +97,21 @@ public class LoginController : SingletonUnity<LoginController> {
 			heartbeat.Restart ();
 		} 
 
-        //登录心跳包
-        time += Time.fixedDeltaTime;
-        if(time > 5)
+        if(BlackBoard.Instance.GetValue<string> (Constant.BB_Name, "") != "")
         {
-            time = 0f;
-
-            if (token != "")
+            //登录心跳包
+            time += Time.fixedDeltaTime;
+            if(time > 5)
             {
-				HeartbeatBag (token);
+                time = 0f;
+
+                if (token != "")
+                {
+                    HeartbeatBag (token);
+                }
             }
         }
+
 
 	}
 

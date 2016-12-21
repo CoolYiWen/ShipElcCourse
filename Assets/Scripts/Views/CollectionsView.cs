@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class CollectionsView : MonoBehaviour
 {
     public GameObject CollectionBg;
+    public GameObject HistoryBtn;
 
     private float minBgHight;
     private float maxBgHight = 534f;
@@ -26,6 +27,15 @@ public class CollectionsView : MonoBehaviour
 	void OnEnable()
 	{
 		OnRefeshClick ();
+
+        if(BlackBoard.Instance.GetValue<string>("name", "") == "")
+        {
+            HistoryBtn.SetActive (false);
+        }
+        else
+        {
+            HistoryBtn.SetActive (true);
+        }
 
         UserView.Instance.Button_Back.SetActive (false);
         UserView.Instance.Button_Back.GetComponent<Button> ().onClick.RemoveAllListeners ();
@@ -55,7 +65,10 @@ public class CollectionsView : MonoBehaviour
 
     public void OnMotorOutputClick()
     {
-        MotorOutputController.Instance.StartMotorOutputView (CollectionsController.Instance.GetEntities());
+        if(CollectionsController.Instance.GetEntities() != null)
+        {
+            MotorOutputController.Instance.StartMotorOutputView (CollectionsController.Instance.GetEntities());
+        }
     }
 }
 

@@ -55,14 +55,9 @@ public class InputController : MonoBehaviour {
 		entity.bWaterWork = output.bWaterWork;
 		entity.bStop = output.bStop;
 
-        if(BlackBoard.Instance.GetValue<string>(Constant.BB_Token, "") == "")
-        {
-            ViewManager.Instance.StartViewByPanelName (Constant.OffLineReportPanel);
-        }
-        else
-        {
-            ViewManager.Instance.StartViewByPanelName (Constant.ReportPanel);
-        }
+
+        ViewManager.Instance.StartViewByPanelName (Constant.ReportPanel);
+
         ViewManager.Instance.CurrentView.GetComponent<ReportView> ().SetView (entity);
 	}
 }

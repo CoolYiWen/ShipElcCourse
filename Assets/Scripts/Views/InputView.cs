@@ -58,20 +58,12 @@ public class InputView : MonoBehaviour {
 
     void OnEnable()
     {
-        if(BlackBoard.Instance.GetValue<string>(Constant.BB_Token, "") == "")
-        {
-            UserView.Instance.Button_Back.SetActive (false);
-            UserView.Instance.SetProfilePosition (false);
-        }
-        else
-        {
-            UserView.Instance.SetProfilePosition (true);
-            UserView.Instance.Button_Back.SetActive (true);
-            UserView.Instance.Button_Back.GetComponent<Button> ().onClick.RemoveAllListeners ();
-            UserView.Instance.Button_Back.GetComponent<Button> ().onClick.AddListener (delegate {
-                OnBackClick();
-            });
-        }
+        UserView.Instance.SetProfilePosition (true);
+        UserView.Instance.Button_Back.SetActive (true);
+        UserView.Instance.Button_Back.GetComponent<Button> ().onClick.RemoveAllListeners ();
+        UserView.Instance.Button_Back.GetComponent<Button> ().onClick.AddListener (delegate {
+            OnBackClick();
+        });   
 
     }
 

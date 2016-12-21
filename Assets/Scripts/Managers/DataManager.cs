@@ -16,6 +16,19 @@ public class DataManager : SingletonUnity<DataManager> {
 		sqlite.CloseConnection ();
 	}
 
+    public bool IsCollectionExist(Entity entity)
+    {
+        SqliteDataReader reader = sqlite.ReadTable ("collections", new string[]{ "id" }, new string[]{ "name" }, new string[]{ "=" }, new string[]{ entity.name });
+        while (reader.Read())
+        {
+            if(reader.GetInt32(reader.GetOrdinal("id")) == entity.id)
+            {
+                return true;
+            }
+        } 
+        return false;
+    }
+
 	public void SaveCollection(Entity entity)
 	{
 		sqlite.InsertValues ("collections", new string[] {
@@ -55,14 +68,14 @@ public class DataManager : SingletonUnity<DataManager> {
 		});
 	}
 
-	public void DeleteCollection(Entity entity)
+    public void DeleteCollection(string name)
 	{
-		sqlite.DeleteValuesAND ("collections", new string[]{ "name" }, new string[]{ "=" }, new string[]{ entity.name });
+		sqlite.DeleteValuesAND ("collections", new string[]{ "name" }, new string[]{ "=" }, new string[]{ name });
 	}
 
 	public void UpdateCollection(Entity entity)
 	{
-		DeleteCollection (entity);
+        DeleteCollection (entity.name);
 		SaveCollection (entity);
 	}
 

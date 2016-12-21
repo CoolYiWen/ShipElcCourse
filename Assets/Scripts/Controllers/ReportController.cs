@@ -9,6 +9,7 @@ public class ReportController : SingletonUnity<ReportController>
 	private CollectApi collectApi = null;
 
 	private int checkId;
+    private Entity entity;
 
 	void Awake()
 	{
@@ -18,9 +19,41 @@ public class ReportController : SingletonUnity<ReportController>
 
 	public void CheckOnServer(Entity entity)
 	{
-		Debug.Log("check:reCon");
-		StartCoroutine (checkApi.CheckPost (BlackBoard.Instance.GetValue(Constant.BB_Token, ""), entity));
+        this.entity = entity;
+
+        if(BlackBoard.Instance.GetValue<string> (Constant.BB_Name, "") == "")
+        {
+            SaveOffLineCollection (entity);
+
+        }
+        else
+        {
+            StartCoroutine (checkApi.CheckPost (BlackBoard.Instance.GetValue(Constant.BB_Token, ""), entity));
+        }
+		
 	}
+
+    public void SaveOffLineCollection(Entity entity, bool cover = false)
+    {
+        if(cover)
+        {
+            DataManager.Instance.SaveCollection (entity);
+            ViewManager.Instance.ShowMessageView ("设备提交成功！");
+        }
+        else
+        {
+            if(DataManager.Instance.IsCollectionExist (entity))
+            {
+                reportView.ShowSelectView ();
+            }
+            else
+            {
+                DataManager.Instance.SaveCollection (entity);
+                ViewManager.Instance.ShowMessageView ("设备提交成功！");
+            }
+        }
+
+    }
 
 	public void SubmitEquipment(string cover = "0")
 	{
@@ -75,7 +108,16 @@ public class ReportController : SingletonUnity<ReportController>
 
 	public void CoverToSubmit()
 	{
-		SubmitEquipment (Constant.Submit_Cover);
+        if(BlackBoard.Instance.GetValue<string> (Constant.BB_Name, "") == "")
+        {
+            SaveOffLineCollection (entity, true);
+
+        }
+        else
+        {
+            SubmitEquipment (Constant.Submit_Cover);
+        }
+		
 	}
 
 
