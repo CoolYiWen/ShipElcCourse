@@ -93,7 +93,7 @@ public class LoginController : SingletonUnity<LoginController> {
 				heartbeat.Restart ();
 				return;
 			}
-
+			  
 			heartbeat.Restart ();
 		} 
 

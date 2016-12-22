@@ -8,7 +8,8 @@ public class DataManager : SingletonUnity<DataManager> {
 
 	void Start()
 	{
-		sqlite = new SQLiteHelper ("data source=offlinedata.db");
+		string appDBPath = Application.dataPath  + "/data.db";
+		sqlite = new SQLiteHelper (@"Data Source=" + appDBPath);
 	}
 
 	void OnDestroy()
@@ -18,7 +19,7 @@ public class DataManager : SingletonUnity<DataManager> {
 
     public bool IsCollectionExist(Entity entity)
     {
-        SqliteDataReader reader = sqlite.ReadTable ("collections", new string[]{ "id" }, new string[]{ "name" }, new string[]{ "=" }, new string[]{ entity.name });
+		SqliteDataReader reader = sqlite.ReadTable ("collections", new string[]{ "id" }, new string[]{ "name" }, new string[]{ "=" }, new string[]{ "'" + entity.name + "'" });
         while (reader.Read())
         {
             if(reader.GetInt32(reader.GetOrdinal("id")) == entity.id)
@@ -26,6 +27,7 @@ public class DataManager : SingletonUnity<DataManager> {
                 return true;
             }
         } 
+		reader.Close ();
         return false;
     }
 
@@ -61,16 +63,16 @@ public class DataManager : SingletonUnity<DataManager> {
 			entity.k04.ToString (),
 			entity.pn4.ToString (),
 			entity.type4.ToString (),
-			entity.bRun.ToString (),
-			entity.bStartBack.ToString (),
-			entity.bWaterWork.ToString (),
-			entity.bStop.ToString (),
+			entity.bRun?"1":"0",
+			entity.bStartBack?"1":"0",
+			entity.bWaterWork?"1":"0",
+			entity.bStop?"1":"0"
 		});
 	}
 
     public void DeleteCollection(string name)
 	{
-		sqlite.DeleteValuesAND ("collections", new string[]{ "name" }, new string[]{ "=" }, new string[]{ name });
+		sqlite.Delete ("collections", new string[]{ "name" }, new string[]{ "'" + name + "'" });
 	}
 
 	public void UpdateCollection(Entity entity)
@@ -126,6 +128,7 @@ public class DataManager : SingletonUnity<DataManager> {
 			entities [i] = entity;
 			i++;
 		}
+		reader.Close ();
 
 		return (Entity[])Algorithm.Redim (entities, i);
 	}

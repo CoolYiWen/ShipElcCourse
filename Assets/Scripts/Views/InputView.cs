@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class InputView : MonoBehaviour {
 
+	private float maxValue = 100000f;
+
 	public InputController inputController;
 
 	public Toggle Toggle_Run;
@@ -84,7 +86,7 @@ public class InputView : MonoBehaviour {
 			p1 = float.Parse(IF_p1.text);
 			e = float.Parse(IF_e.text)/100;
 
-			if (No <= 0 || num <= 0 || pmax <= 0 || p1 <= 0 || e <= 0)
+			if (No <= 0 || num <= 0 || pmax <= 0 || p1 <= 0 || e <= 0 || No > maxValue || num > maxValue || pmax > maxValue || p1 > maxValue || e > maxValue)
 			{
 				ViewManager.Instance.ShowMessageView (errorMsg2);
 				return;
@@ -104,7 +106,7 @@ public class InputView : MonoBehaviour {
 				k01 = float.Parse(IF_k01.text);
 				type1 = Dd_type1.value + 1;
 
-				if (k21 <= 0 || k01 <= 0)
+				if (k21 <= 0 || k01 <= 0 || k21 > maxValue || k01 > maxValue)
 				{
 					ViewManager.Instance.ShowMessageView (errorMsg2);
 					return;
@@ -131,7 +133,7 @@ public class InputView : MonoBehaviour {
 				k02 = float.Parse(IF_k02.text);
 				type2 = Dd_type2.value + 1;
 
-				if (k22 <= 0 || k02 <= 0)
+				if (k22 <= 0 || k02 <= 0 || k22 > maxValue || k02 > maxValue)
 				{
 					ViewManager.Instance.ShowMessageView (errorMsg2);
 					return;
@@ -158,7 +160,7 @@ public class InputView : MonoBehaviour {
 				k03 = float.Parse(IF_k03.text);
 				type3 = Dd_type3.value + 1;
 
-				if (k23 <= 0 || k03 <= 0)
+				if (k23 <= 0 || k03 <= 0 || k23 > maxValue || k03 > maxValue)
 				{
 					ViewManager.Instance.ShowMessageView (errorMsg2);
 					return;
@@ -185,7 +187,7 @@ public class InputView : MonoBehaviour {
 				k04 = float.Parse(IF_k04.text);
 				type4 = Dd_type4.value + 1;
 
-				if (k24 <= 0 || k04 <= 0)
+				if (k24 <= 0 || k04 <= 0 || k24 > maxValue || k04 > maxValue)
 				{
 					ViewManager.Instance.ShowMessageView (errorMsg2);
 					return;

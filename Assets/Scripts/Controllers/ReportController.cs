@@ -37,7 +37,7 @@ public class ReportController : SingletonUnity<ReportController>
     {
         if(cover)
         {
-            DataManager.Instance.SaveCollection (entity);
+			DataManager.Instance.UpdateCollection (entity);
             ViewManager.Instance.ShowMessageView ("设备提交成功！");
         }
         else

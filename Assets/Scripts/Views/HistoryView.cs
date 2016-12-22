@@ -8,9 +8,9 @@ public class HistoryView : MonoBehaviour
 
 	private HistoryController historyController = null;
 
-    private float minBgHight;
-    private float maxBgHight = 534f;
-    private float bgWidth;
+	private float minBgHight = 324f;
+	private float maxBgHight = 476f;
+	private float bgWidth = 650f;
 
 
 	void Awake()
@@ -20,7 +20,6 @@ public class HistoryView : MonoBehaviour
 
     void Start()
     {
-        minBgHight = HistoryBg.GetComponent<RectTransform>().sizeDelta.y;
         bgWidth = HistoryBg.GetComponent<RectTransform>().sizeDelta.x;
     }
 

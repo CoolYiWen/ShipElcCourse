@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using Mono.Data;
 using Mono.Data.Sqlite;
 using System;
-using System.Data;
+using UnityEngine;
 
 public class SQLiteHelper
 {
@@ -126,6 +125,18 @@ public class SQLiteHelper
 		return ExecuteQuery(queryString);
 	}
 
+    public SqliteDataReader Delete(string tableName,string []cols,string []colsvalues)
+    {
+            string query = "DELETE FROM "+tableName + " WHERE " +cols[0] +" = " + colsvalues[0];
+ 
+            for (int i = 1; i < colsvalues.Length; ++i) {
+ 
+                query += " or " +cols[i]+" = "+ colsvalues[i];
+            }
+        Debug.Log(query);
+        return ExecuteQuery (query);
+    }
+
 	/// <summary>
 	/// 删除指定数据表内的数据
 	/// </summary>
@@ -147,6 +158,8 @@ public class SQLiteHelper
 		}
 		return ExecuteQuery(queryString);
 	}
+
+
 
 	/// <summary>
 	/// 删除指定数据表内的数据

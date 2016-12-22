@@ -7,15 +7,14 @@ public class CollectionsView : MonoBehaviour
     public GameObject CollectionBg;
     public GameObject HistoryBtn;
 
-    private float minBgHight;
-    private float maxBgHight = 534f;
-    private float bgWidth;
+    private float minBgHight = 324f;
+    private float maxBgHight = 476f;
+    private float bgWidth = 650f;
 
 	private CollectionsController collectionsController = null;
 
     void Start()
     {
-        minBgHight = CollectionBg.GetComponent<RectTransform>().sizeDelta.y;
         bgWidth = CollectionBg.GetComponent<RectTransform>().sizeDelta.x;
     }
 
@@ -44,7 +43,7 @@ public class CollectionsView : MonoBehaviour
 
     public void SetCollectionBgView(int size)
     {
-        CollectionBg.GetComponent<RectTransform> ().sizeDelta = new Vector2 (bgWidth, Mathf.Clamp (minBgHight + 76 * (size - 2), minBgHight, maxBgHight));
+        CollectionBg.GetComponent<RectTransform> ().sizeDelta = new Vector2 (bgWidth, Mathf.Clamp (minBgHight + 76 * (size - 1), minBgHight, maxBgHight));
     }
 
 	public void OnRefeshClick()

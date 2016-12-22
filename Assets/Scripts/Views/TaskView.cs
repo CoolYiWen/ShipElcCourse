@@ -7,10 +7,10 @@ public class TaskView : MonoBehaviour {
 
 	public GameObject G_Item = null;
 	public GameObject G_content = null;
-	private float itemHight;
-    private float minTaskHight;
-    private float maxTaskHight;
-    private float taskWidth;
+	private float itemHight = 76f;
+    private float minTaskHight = 76.5f;
+    private float maxTaskHight = 228.5f;
+    private float taskWidth = 598f;
 
 	public Entity[] entities = null;
 	public List<GameObject> ItemList = new List<GameObject> ();
@@ -20,8 +20,6 @@ public class TaskView : MonoBehaviour {
 	void Start()
 	{
 		itemHight = G_Item.GetComponent<RectTransform>().sizeDelta.y;
-        minTaskHight = this.gameObject.GetComponent<RectTransform>().sizeDelta.y;
-        maxTaskHight = minTaskHight + 2 * itemHight;
         taskWidth = this.gameObject.GetComponent<RectTransform>().sizeDelta.x;
 	}
 
@@ -36,7 +34,7 @@ public class TaskView : MonoBehaviour {
         ClearView ();
 
 		this.entities = entities;
-        this.gameObject.GetComponent<RectTransform> ().sizeDelta = new Vector2 (taskWidth, Mathf.Clamp (minTaskHight + itemHight * (entities.Length - 2), minTaskHight, maxTaskHight));
+        this.gameObject.GetComponent<RectTransform> ().sizeDelta = new Vector2 (taskWidth, Mathf.Clamp (minTaskHight + itemHight * (entities.Length - 1), minTaskHight, maxTaskHight));
 
         G_content.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0, itemHight * entities.Length);
 
